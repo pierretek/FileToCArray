@@ -16,6 +16,7 @@ function handleFileSelected(e) {
     var singleFile = e.target.files[0];
     var url = URL.createObjectURL(singleFile);
     uploadedFile = singleFile;
+
     // figure out the variable name to use - remove the file extension, and replace any characters not allowed in a variable name
     variableName = uploadedFile.name.replace(/\.[^/.]+$/, "").replace(/[^a-zA-Z0-9_]+/g, '_');
     // variable names can't begin with a number
@@ -23,8 +24,7 @@ function handleFileSelected(e) {
     if (rx.test(variableName)) {
         variableName = '_' + variableName;
     }
-    // the above rules should create a variable name valid for most languages
-    
+
     init();
 
     imgImageHolder = null;
@@ -67,6 +67,26 @@ function handleFileSelected(e) {
     }
     reader.readAsArrayBuffer(singleFile);
 }
+/**
+ * Chooses whether to include custom image name or default one
+ */
+function findVariableName() {
+
+    variableName = uploadedFile.name.replace(/\.[^/.]+$/, "").replace(/[^a-zA-Z0-9_]+/g, '_');
+    // variable names can't begin with a number
+    var rx = new RegExp(/^[0-9]*$/gm);
+    if (rx.test(variableName)) {
+        variableName = '_' + variableName;
+    }
+
+    var variableChoice = $('#variableNameChoice').val().replace(/\.[^/.]+$/, "").replace(/[^a-zA-Z0-9_]+/g, '_');
+
+    if (variableChoice != null && variableChoice.trim() !== "") {
+        variableName = variableChoice;
+    }
+
+}
+
 
 /**
  * Decides based on the mime type whether the current file is an image or not
@@ -144,7 +164,6 @@ function convert() {
     setStatus('done.');
 }
 
-
 /**
  * Converts the image to the specified format, and returns the modified pixels in the new format along with them in 24bit format
  */
@@ -209,6 +228,7 @@ function convertToString(data, colNum, isImage, imageHeight, imageWidth) {
     var dataLength = data.byteLength;
     console.log('dataLength: ' + dataLength);
     var bytesPerPixel = 1;
+
     if (isImage) {
         bytesPerPixel = (dataLength / (imageWidth * imageHeight));
     }
@@ -274,7 +294,7 @@ function saveFile() {
 }
 
 function setStatus(message) {
-    $('#spnStatus').text(message);   
+    $('#spnStatus').text(message);
 }
 
 function init() {
@@ -295,6 +315,9 @@ function init() {
 
 function assebleSignature() {
     var sig = '';
+
+    findVariableName();
+
     if ($('#cbStatic').is(':checked')) {
         sig += $('#cbStatic').val() + ' ';
     }
@@ -316,6 +339,24 @@ function updateSignaturePreview() {
     $('#spnSignaturePreview').text(assebleSignature() + ' = { ... };');
 }
 
+// TODO: finish this part
+function applyPreset() {
+    var presetOption = $('#selPreset').val()
+    switch (presetOption) {
+        case 'ST7735':
+            // set 16 bit rgb
+            $('#cbPaletteMod').val('16');
+            // make it big endian
+            $('#selEndianness').val('be');
+            // make it uint16_t
+            $('#selDataType').val('uint16_t');
+            break;
+
+        default:
+            return;
+    }
+}
+
 $('document').ready(function () {
     // init
     $('#inFileInput').on('change', handleFileSelected);
@@ -334,17 +375,20 @@ $('document').ready(function () {
     $('.image1BitModeOnly').each(function () {
         $(this).prop('disabled', true);
     })
+    $('#selPreset').on('change click', applyPreset);
     $('#btnConvert').on('click', convert);
     $('#btnCopyToClipboard').on('click', copyToClipboard);
     $('#btnSaveImage').on('click', saveImage);
     $('#btnSaveFile').on('click', saveFile);
 
+    //Conversion settings
+    $('#variableNameChoice').on('input', updateSignaturePreview);
     $('#cbStatic').on('change', updateSignaturePreview);
     $('#cbConst').on('change', updateSignaturePreview);
     $('#selDataType').on('change', updateSignaturePreview);
     $('#cbPROGMEM').on('change', updateSignaturePreview);
 
-    $.get('https://api.github.com/repos/notisrac/FileToCArray', function(data) {
+    $.get('https://api.github.com/repos/notisrac/FileToCArray', function (data) {
         var updateAt = new Date(data.updated_at);
         console.log(updateAt);
         $('#versionInfo').text(updateAt.toISOString());
@@ -352,7 +396,7 @@ $('document').ready(function () {
         var gitUrl = data.html_url
         $('#gitLink').attr('href', gitUrl);
         $('#gitLink').text(gitUrl);
-    }); 
+    });
 
 
     init();

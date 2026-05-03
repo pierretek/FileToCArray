@@ -1,69 +1,189 @@
-label {
-    width: 190px;
-    margin: 1px;
-    display: inline-block;
-    vertical-align: top;
+.header {
+    width: 70vw;
+    text-align: center;
 }
 
+.header p {
+    line-height: 0.5;
+    font-size: 20px;
+    color: #a7a7a7;
+}
+
+.header p a {
+    color: #a7a7a7;
+    text-decoration: underline;
+}
+
+/* Body Styles */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+
+    font-family: 'Trebuchet MS';
+    background-color: #46464b;
+    color: #dcdcdc;
+
+    font-size: 20px;
+}
+
+#inFileInput {
+    padding: 3px;
+    /* gives outline space to show fully */
+}
+
+/* Button Styles */
+#inFileInputLabel,
+#btnConvert {
+    text-align: center;
+    cursor: pointer;
+    min-width: fit-content;
+
+    border: none;
+    width: 20vw;
+
+    color: white;
+    font-weight: 600;
+
+    background: radial-gradient(ellipse farthest-corner at top right,
+            rgba(0, 212, 7, 1) 10%,
+            rgba(0, 183, 241, 1) 60%,
+            rgba(0, 44, 170, 1));
+
+    text-shadow: -1px 1px 3px rgb(0, 0, 0);
+
+    padding: 20px;
+    border-radius: 15px;
+    font-size: 30px;
+}
+
+#inFileInputLabel:hover,
+#btnConvert:hover {
+    outline: 3px solid white;
+}
+
+#btnCopyToClipboard,
+#btnSaveFile,
+#btnSaveImage {
+    cursor: pointer;
+    border: none;
+    margin-top: 10px;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 20px;
+    background-color: #1d1f23;
+    color: #dcdcdc;
+}
+
+#btnCopyToClipboard {
+    background-color: rgb(9, 82, 114);
+}
+
+#btnCopyToClipboard:hover {
+    outline: 3px solid rgb(3, 232, 244);
+    background-color: rgb(12, 137, 168);
+}
+
+#btnSaveFile {
+    background-color: rgb(27, 114, 9);
+}
+
+#btnSaveFile:hover {
+    outline: 3px solid rgb(3, 244, 111);
+    background-color: rgb(35, 151, 11);
+}
+
+#btnSaveImage {
+    background-color: rgb(89, 9, 114);
+}
+
+#btnSaveImage:hover {
+    outline: 3px solid rgb(208, 3, 244);
+    background-color: rgb(128, 11, 151);
+}
+
+
+
 fieldset {
-    width: 600px;
+    width: 70vw;
+    border-radius: 10px;
+    background-color: rgb(40, 43, 48);
+    box-shadow: 0 8px 15px rgb(38, 38, 38);
+
+    padding: 30px;
+}
+
+legend {
+    font-size: 40px;
 }
 
 img {
-    image-rendering: optimizeSpeed;             /* STOP SMOOTHING, GIVE ME SPEED  */
-    image-rendering: -moz-crisp-edges;          /* Firefox                        */
-    image-rendering: -o-crisp-edges;            /* Opera                          */
-    image-rendering: -webkit-optimize-contrast; /* Chrome (and eventually Safari) */
-    image-rendering: pixelated; /* Chrome */
-    image-rendering: optimize-contrast;         /* CSS3 Proposed                  */
-    -ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */
+    image-rendering: optimizeSpeed;
+    /* STOP SMOOTHING, GIVE ME SPEED  */
+    image-rendering: -moz-crisp-edges;
+    /* Firefox                        */
+    image-rendering: -o-crisp-edges;
+    /* Opera                          */
+    image-rendering: -webkit-optimize-contrast;
+    /* Chrome (and eventually Safari) */
+    image-rendering: pixelated;
+    /* Chrome */
+    image-rendering: optimize-contrast;
+    /* CSS3 Proposed                  */
+    -ms-interpolation-mode: nearest-neighbor;
+    /* IE8+                           */
 }
 
-#imgPreview {
-    display: inline-block;
-    max-height: 100px;
-    min-height: 32px;
-    border: 1px solid #696969;
-}
-
-.imageConversionOption {
-}
 
 .shortInput {
     width: 50px;
 }
 
-/*#divResult > img {
-    padding-top: 10px;
-    max-width: 95vw;
+.longInput {
+    width: 150px;
 }
 
-#fsResult {
-    max-width: 96vw;
+/* #fsResult{
+    display: flex;
+    align-items: center;
+    } */
+
+#spnStatus {
+    padding-top: 20px;
+    font-size: 40px;
+}
+
+
+label {
+    width: 280px;
+    margin: 1px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+#imgPreview {
+    display: inline-block;
+    height: 200px;
+    border: 1px solid #696969;
+}
+
+#divResult {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+#txtResult {
+    display: block;
+    background-color: #1d1f23;
+    scrollbar-width: none;
+    color: #dcdcdc;
+    border-radius: 10px;
     width: 100%;
-}
-
-#txtResult {
-    width: 95vw;
-    height: 500px;
-    float: left;
-    font-size: 13px;
-}*/
-
-#divResult > img {
-    padding-left: 10px;
-    max-width: 800px;
-}
-
-#fsResult {
-    max-width: 1620px;
-    /*width: 100%;*/
-}
-
-#txtResult {
-    width: 800px;
-    height: 530px;
-    float: left;
+    height: 50vh;
     font-size: 13px;
 }
 
@@ -71,34 +191,57 @@ img {
     text-decoration: none;
 }
 
-.versionInfo {
-    font-size: 10px;
-    margin-left: 10px;
-    font-weight: normal;
-}
-
-.additionalInfo {
-    margin-top: -20px;
-    font-weight: normal;
-    font-size: 14px;
-}
-
 .signaturePreview {
-    float: right;
+    display: inline-block;
+    margin-top: 20px;
+    background-color: #1d1f23;
+    border-radius: 5px;
+    padding: 10px;
     font-family: 'Courier New', Courier, monospace;
-    font-size: 12px;
-    padding-top: 4px;
-    color: #696969;
+    font-size: 15px;
+    font-weight: 550;
+    color: #ffffff;
 }
+
+.option {
+    border: 1px solid #727272;
+    margin-top: 10px;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: #1d1f23;
+    color: #dcdcdc;
+}
+
+.option[type="checkbox"] {
+    appearance: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #727272;
+    cursor: pointer;
+}
+
+.option[type="checkbox"]::after {
+    content: '✓';
+    color: transparent;
+    font-size: 16px;
+    line-height: 1;
+}
+
+.option[type="checkbox"]:checked::after {
+    color: white;
+}
+
+
 
 /* Tooltip container */
 .tooltip {
     position: relative;
     display: inline-block;
-    width: 16px;
-    height: 16px;
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAPUExURQAAAAAAAAAAAAAAAAAAAE8O540AAAAFdFJOUwAyIhcHOGe1IAAAAFdJREFUGNNlj1ECwCAIQgW5/5lHaas1vvSpqBGWkgRT0UqAFpCVu6gVVD13q0MVBqpHptog3ELGIWdrAu3bIDYgPoC3KXstymSs/R32XnwE93Pz/cGm+wN52wDgRMjGVQAAAABJRU5ErkJggg==);
-    top: 2px;
+    font-size: 22px;
 }
 
 /* Tooltip text */
@@ -112,12 +255,12 @@ img {
     text-align: left;
     padding: 5px;
     border-radius: 6px;
- 
+
     /* Position the tooltip text - see examples below! */
     position: absolute;
     z-index: 1;
     top: -5px;
-    left: 150%; 
+    left: 150%;
 
     font-size: 12px;
 }
@@ -131,12 +274,16 @@ img {
     content: " ";
     position: absolute;
     top: 13px;
-    right: 100%; 
+    right: 100%;
     margin-top: -5px;
     border-width: 5px;
     border-style: solid;
     border-color: transparent black transparent transparent;
 }
 
-.image1BitModeOnly {
+
+@media screen and (max-width: 1180px) {
+    .header p {
+        line-height: 1;
+    }
 }
