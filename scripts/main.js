@@ -24,6 +24,7 @@ function handleFileSelected(e) {
     if (rx.test(variableName)) {
         variableName = '_' + variableName;
     }
+    $('#variableNameChoice').val(variableName)
 
     init();
 
@@ -339,7 +340,6 @@ function updateSignaturePreview() {
     $('#spnSignaturePreview').text(assebleSignature() + ' = { ... };');
 }
 
-// TODO: finish this part
 function applyPreset() {
     var presetOption = $('#selPreset').val()
     switch (presetOption) {
