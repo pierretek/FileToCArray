@@ -249,8 +249,8 @@ function convertToString(data, colNum, isImage, imageHeight, imageWidth) {
 
     // do the conversion
     if (isImage) {
-        resultString += '#define ' + variableName.toUpperCase() + '_HEIGHT ' + imageHeight + '\r\n';
         resultString += '#define ' + variableName.toUpperCase() + '_WIDTH ' + imageWidth + '\r\n';
+        resultString += '#define ' + variableName.toUpperCase() + '_HEIGHT ' + imageHeight + '\r\n';
         resultString += '\r\n';
     }
 
